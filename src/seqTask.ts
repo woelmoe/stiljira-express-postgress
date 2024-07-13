@@ -11,7 +11,7 @@ export interface ITask {
 
 import { seqDatabase } from './seqDatabase'
 import { TaskType } from './interfaces/interfaces'
-const Task = seqDatabase.define('task', {
+export const Task = seqDatabase.define('task', {
   id: {
     type: INTEGER,
     autoIncrement: true,
