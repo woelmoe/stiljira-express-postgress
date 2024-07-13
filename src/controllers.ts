@@ -1,4 +1,4 @@
-import { Task } from './seqTask'
+import { ITask, Task } from './seqTask'
 
 export function getTasks(req, res, next) {
   Task.findAll()
@@ -9,7 +9,7 @@ export function getTasks(req, res, next) {
 }
 
 export async function getTask(req, res, next) {
-  const taskId = req.params.taskId
+  const taskId = req.body.id
   try {
     const task = await Task.findByPk(taskId)
     if (!task) {
@@ -45,7 +45,7 @@ export async function createTask(req, res, next) {
 export async function updateTask(req, res, next) {
   const editedTask = req.body
 
-  const foundTask = await Task.findByPk(editedTask.id)
+  const foundTask: any = await Task.findByPk(editedTask.id)
   if (!foundTask) {
     return res.status(404).json({ message: 'Task not found!' })
   }
