@@ -1,4 +1,4 @@
-import { INTEGER, Model, ModelCtor, STRING } from 'sequelize'
+import { INTEGER, STRING } from 'sequelize'
 import { seqDatabase } from './seqDatabase'
 import { TaskType } from './interfaces/interfaces'
 
