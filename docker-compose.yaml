@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  node_app:
+    container_name: node_app
+    build: .
+    image: stiljira_app
+    ports:
+      - '3000:3000'
+    environment:
+      - PG_DB=stiljira
+      - PG_USER=admin
+      - PG_PASSWORD=adm777
+      - PG_HOST=stiljira_db
+    depends_on:
+      - stiljira_db
+
+  stiljira_db:
+    container_name: stiljira_db
+    image: postgres:12
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=stiljira
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=adm777
+    volumes:
+      - node_db_data:/var/lib/postgresql/data
+
+volumes:
+  node_db_data: {}
