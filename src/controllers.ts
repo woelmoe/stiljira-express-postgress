@@ -3,7 +3,7 @@ import { ITask, Task } from './seqTask'
 export function getTasks(req, res, next) {
   Task.findAll()
     .then((tasks) => {
-      res.status(200).json({ tasks: tasks })
+      res.status(200).json(tasks)
     })
     .catch((err) => console.log(err))
 }
@@ -26,7 +26,7 @@ export async function createTask(req, res, next) {
 
   try {
     const result = await Task.create({
-      counter: newTask.counter,
+      counter: newTask.id,
       title: newTask.title,
       type: newTask.type,
       content: newTask.content,
