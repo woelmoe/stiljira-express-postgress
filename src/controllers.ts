@@ -26,7 +26,6 @@ export async function createTask(req, res, next) {
 
   try {
     const result: any = await Task.create({
-      title: newTask.title,
       type: newTask.type,
       content: newTask.content,
       description: newTask.description
