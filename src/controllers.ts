@@ -25,8 +25,7 @@ export async function createTask(req, res, next) {
   const newTask = req.body
 
   try {
-    const result = await Task.create({
-      counter: newTask.id,
+    const result: any = await Task.create({
       title: newTask.title,
       type: newTask.type,
       content: newTask.content,
@@ -35,7 +34,13 @@ export async function createTask(req, res, next) {
     console.log('Created Task')
     res.status(201).json({
       message: 'Task created successfully!',
-      user: result
+      task: {
+        title: `Task-${result.id}`,
+        content: result.content,
+        description: result.description,
+        id: result.id,
+        type: result.type
+      } as ITask
     })
   } catch (e) {
     console.log(e)

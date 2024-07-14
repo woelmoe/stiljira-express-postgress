@@ -11,7 +11,7 @@ import { Express } from 'express'
 //   }
 // )
 export const seqDatabase = new Sequelize('stiljira', 'admin', 'adm777', {
-  host: 'localhost',
+  host: process.env.PG_HOST,
   dialect: 'postgres'
 })
 

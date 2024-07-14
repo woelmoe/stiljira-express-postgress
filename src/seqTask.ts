@@ -18,8 +18,6 @@ export const Task = seqDatabase.define('task', {
     allowNull: false,
     primaryKey: true
   },
-  counter: INTEGER,
-  title: STRING,
   type: STRING,
   content: STRING,
   description: STRING
