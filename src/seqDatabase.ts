@@ -1,19 +1,17 @@
 import { Sequelize } from 'sequelize'
 import { Express } from 'express'
+import 'dotenv/config'
 
-// export const seqDatabase = new Sequelize(
-//   process.env.PG_DB,
-//   process.env.PG_USER,
-//   process.env.PG_PASSWORD,
-//   {
-//     host: process.env.PG_HOST,
-//     dialect: 'postgres'
-//   }
-// )
-export const seqDatabase = new Sequelize('stiljira', 'admin', 'adm777', {
-  host: process.env.PG_HOST,
-  dialect: 'postgres'
-})
+console.log(process.env.PG_DB, process.env.PG_USER, process.env.PG_PASSWORD)
+export const seqDatabase = new Sequelize(
+  process.env.PG_DB,
+  process.env.PG_USER,
+  process.env.PG_PASSWORD,
+  {
+    host: process.env.PG_HOST,
+    dialect: 'postgres'
+  }
+)
 
 export async function startConnectionToDb(app: Express) {
   try {
