@@ -1,6 +1,8 @@
 import { ITask, Task } from './seqTask'
+import { IRouteData } from './interfaces/interfaces'
 
-export function getTasks(req, res, next) {
+export function getTasks(data: IRouteData) {
+  const { res } = data
   Task.findAll()
     .then((tasks) => {
       res.status(200).json(tasks)
@@ -8,7 +10,8 @@ export function getTasks(req, res, next) {
     .catch((err) => console.log(err))
 }
 
-export async function getTask(req, res, next) {
+export async function getTask(data: IRouteData) {
+  const { res, req } = data
   const taskId = req.body.id
   try {
     const task = await Task.findByPk(taskId)
@@ -21,7 +24,8 @@ export async function getTask(req, res, next) {
   }
 }
 
-export async function createTask(req, res, next) {
+export async function createTask(data: IRouteData) {
+  const { res, req } = data
   const newTask = req.body
 
   try {
@@ -46,7 +50,8 @@ export async function createTask(req, res, next) {
   }
 }
 
-export async function updateTask(req, res, next) {
+export async function updateTask(data: IRouteData) {
+  const { res, req } = data
   const editedTask = req.body
 
   const foundTask: any = await Task.findByPk(editedTask.id)
@@ -65,14 +70,15 @@ export async function updateTask(req, res, next) {
   }
 }
 
-export async function deleteTask(req, res, next) {
+export async function deleteTask(data: IRouteData) {
+  const { res, req } = data
   const editedTask = req.body
   const foundTask = await Task.findByPk(editedTask.id)
   if (!foundTask) {
     return res.status(404).json({ message: 'Task not found!' })
   }
   try {
-    const result = await Task.destroy({
+    await Task.destroy({
       where: {
         id: editedTask.id
       }

@@ -1,3 +1,10 @@
+import { Request, Response, NextFunction } from 'express'
+
+export interface IRouteData {
+  req: Request
+  res: Response
+  next: NextFunction
+}
 export enum TaskType {
   todo = 'todo',
   inWork = 'inWork',

@@ -6,9 +6,15 @@ export function createRoutes(app: Express) {
 
   app.get('/tasks', getTasks)
 
-  app.post('/tasks', jsonParser, createTask)
+  app.post('/tasks', jsonParser, (req, res, next) => {
+    createTask({ req, res, next })
+  })
 
-  app.post('/tasks/put', jsonParser, updateTask)
+  app.post('/tasks/put', jsonParser, (req, res, next) => {
+    updateTask({ req, res, next })
+  })
 
-  app.post('/tasks/delete', jsonParser, deleteTask)
+  app.post('/tasks/delete', jsonParser, (req, res, next) => {
+    deleteTask({ req, res, next })
+  })
 }
