@@ -1,8 +1,6 @@
 import { Sequelize } from 'sequelize'
-import { Express } from 'express'
 import 'dotenv/config'
 
-console.log(process.env.PG_DB, process.env.PG_USER, process.env.PG_PASSWORD)
 export const seqDatabase = new Sequelize(
   process.env.PG_DB,
   process.env.PG_USER,
@@ -13,7 +11,7 @@ export const seqDatabase = new Sequelize(
   }
 )
 
-export async function startConnectionToDb(app: Express) {
+export async function startConnectionToDb() {
   try {
     await seqDatabase.sync()
   } catch (error) {

@@ -5,7 +5,6 @@
 
 ### develop
 * `yarn build`
-* `yarn watch`
 * `yarn dev`
 
 yarn watch и yarn dev выполнять в разных консолях

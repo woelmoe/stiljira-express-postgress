@@ -15,8 +15,7 @@ export async function startServer() {
 
   const port = process.env.PORT || 3000
 
-  // console.log(process.env)
-  await startConnectionToDb(app)
+  await startConnectionToDb()
 
   createRoutes(app)
 
