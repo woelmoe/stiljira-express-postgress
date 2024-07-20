@@ -3,7 +3,6 @@
 ### run docker container
 * `docker build .`
 * `docker compose up -d`
-* После сборки контейнера необходимо запустить еще раз контейнер
 
 ### develop
 * `yarn build`
