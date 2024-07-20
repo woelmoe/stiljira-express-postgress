@@ -9,7 +9,8 @@
     "nodemon-watch": "nodemon dist/index",
     "watch": "tsc -w",
     "start": "node dist/index.js",
-    "dev": "npm-run-all --race --parallel watch nodemon-watch"
+    "dev": "cross-env IS_DEV=true npm-run-all --race --parallel watch nodemon-watch ",
+    "run-docker": "docker build . && docker compose up -d"
   },
   "author": "holodnyak",
   "license": "ISC",
@@ -21,7 +22,8 @@
     "nodemon": "^3.1.4",
     "parallel": "^1.2.0",
     "prettier": "^3.1.1",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "cross-env": "^7.0.3"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
