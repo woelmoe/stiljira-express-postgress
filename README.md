@@ -1,7 +1,8 @@
 # stiljira-express-postgress
 
 ### run docker container
-* ```docker compose up -d```
+* `docker build`
+* `docker compose up -d`
 
 ### develop
 * `yarn build`
