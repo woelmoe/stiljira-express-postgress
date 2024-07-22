@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
+import { Optional } from 'sequelize'
 
 export interface IRouteData {
   req: Request
@@ -16,6 +17,16 @@ export interface ITask {
   description: string
   content: string
   type: TaskType
+
   title?: string
-  editable?: boolean
+  createdAt?: Date
+  updatedAt?: Date
+  deletedAt?: Date
 }
+export interface ITaskInput
+  extends Optional<
+    ITask,
+    'id' | 'title' | 'createdAt' | 'updatedAt' | 'deletedAt'
+  > {}
+export interface ITaskOutput
+  extends Optional<ITask, 'createdAt' | 'updatedAt' | 'deletedAt'> {}

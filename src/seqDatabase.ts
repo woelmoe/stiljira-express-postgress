@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize'
 import 'dotenv/config'
+import Task from './assets/Task'
 
 export const seqDatabase = new Sequelize(
   process.env.PG_DB,
@@ -14,7 +15,7 @@ export const seqDatabase = new Sequelize(
 let tryCounter = 10
 export async function startConnectionToDb() {
   try {
-    await seqDatabase.sync()
+    await Task.sync()
   } catch (error) {
     tryCounter--
     setTimeout(() => {
