@@ -4,7 +4,6 @@ import { seqDatabase } from '../seqDatabase'
 
 class Task extends Model<ITask, ITaskInput> implements ITask {
   public id: number
-  public title?: string
   public content: string
   public description: string
   public type: TaskType

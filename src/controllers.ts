@@ -20,14 +20,17 @@ export async function createTask(data: IRouteData) {
     description: newTask.description
   }
   try {
-    const result: ITaskOutput = await Task.create(payload)
+    const result = await Task.create(payload)
+    const { dataValues } = result
+    console.log(result)
     const task: ITaskOutput = {
-      title: `Task-${result.id}`,
-      content: result.content,
-      description: result.description,
-      id: result.id,
-      type: result.type
+      title: `Task-${dataValues.id}`,
+      content: dataValues.content,
+      description: dataValues.description,
+      id: dataValues.id,
+      type: dataValues.type
     }
+    console.log(task)
     res.status(201).json({
       message: 'Task created successfully!',
       task
@@ -41,16 +44,16 @@ export async function updateTask(data: IRouteData) {
   const { res, req } = data
   const editedTask = req.body
 
-  const foundTask = await Task.findByPk(editedTask.id)
-  if (!foundTask) {
-    return res.status(404).json({ message: `Task ${editedTask.id} not found!` })
+  const payload: ITaskInput = {
+    type: editedTask.type,
+    content: editedTask.content,
+    description: editedTask.description
   }
-  foundTask.title = editedTask.title
-  foundTask.type = editedTask.type
-  foundTask.content = editedTask.content
-  foundTask.description = editedTask.description
   try {
-    const task = await foundTask.save()
+    const task = await Task.update(payload, {
+      where: { id: editedTask.id }
+    })
+    console.log(task)
     res.status(200).json({ message: 'Task updated!', task })
   } catch (e) {
     console.log(e)
