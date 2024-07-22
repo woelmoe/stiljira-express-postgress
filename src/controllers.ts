@@ -22,7 +22,6 @@ export async function createTask(data: IRouteData) {
   try {
     const result = await Task.create(payload)
     const { dataValues } = result
-    console.log(result)
     const task: ITaskOutput = {
       title: `Task-${dataValues.id}`,
       content: dataValues.content,
@@ -30,7 +29,6 @@ export async function createTask(data: IRouteData) {
       id: dataValues.id,
       type: dataValues.type
     }
-    console.log(task)
     res.status(201).json({
       message: 'Task created successfully!',
       task
@@ -53,7 +51,6 @@ export async function updateTask(data: IRouteData) {
     const task = await Task.update(payload, {
       where: { id: editedTask.id }
     })
-    console.log(task)
     res.status(200).json({ message: 'Task updated!', task })
   } catch (e) {
     console.log(e)
