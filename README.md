@@ -8,4 +8,8 @@
 * `yarn build`
 * `yarn dev`
 
-yarn watch и yarn dev выполнять в разных консолях
+### тестоая сборка ghinx
+
+`docker build -t stiljira .`
+`docker run -d --name kal -p 3000:3000 stiljira`
+
