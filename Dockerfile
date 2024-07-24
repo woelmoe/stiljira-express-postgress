@@ -22,5 +22,5 @@ COPY nginx.conf /etc/nginx/nginx.conf
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /src/front/dist /usr/share/nginx/html/stiljira
 
-EXPOSE 3000
+EXPOSE 5173
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
