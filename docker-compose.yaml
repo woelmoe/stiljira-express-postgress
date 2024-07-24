@@ -2,9 +2,11 @@ version: '3.9'
 
 services:
   node_app:
-    container_name: node_app
-    build: .
-    image: stiljira_app
+    container_name: stiljira_back
+    build:
+      context: .
+      dockerfile: ./docker/back/Dockerfile
+    image: stiljira_back
     ports:
       - '3000:3000'
     environment:
@@ -26,6 +28,15 @@ services:
       - POSTGRES_PASSWORD=${PG_PASSWORD}
     volumes:
       - node_db_data:/var/lib/postgresql/data
+
+  front_app:
+    container_name: front_app
+    build:
+      context: .
+      dockerfile: ./docker/web/Dockerfile
+    image: stiljira_front
+    ports:
+      - '5173:5173'
 
 volumes:
   node_db_data: {}

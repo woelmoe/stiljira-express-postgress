@@ -11,8 +11,8 @@
     "watch": "tsc -w",
     "start": "node dist/index",
     "dev": "cross-env IS_DEV=true npm-run-all --race --parallel watch nodemon-watch ",
-    "build-front": "cd src/front && yarn && yarn build",
-    "run-docker": "docker build . && docker compose up -d"
+    "setup-front": "git submodule update --init && cd src/front && git checkout main && cd ../../",
+    "setup": "yarn setup-front && docker compose up -d"
   },
   "author": "holodnyak",
   "license": "ISC",
