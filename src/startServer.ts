@@ -14,7 +14,7 @@ export async function startServer() {
     next()
   })
 
-  const port = process.env.PORT || 3000
+  const port = Number(process.env.PORT) || 3000
 
   await startConnectionToDb()
 
@@ -22,7 +22,7 @@ export async function startServer() {
 
   createRoutes(app)
 
-  app.listen(port, () => {
+  app.listen(port, '0.0.0.0', () => {
     console.log(`[server]: new Server is running at http://localhost:${port}`)
   })
 }

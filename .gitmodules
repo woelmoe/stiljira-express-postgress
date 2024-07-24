@@ -1,0 +1,3 @@
+[submodule "src/front"]
+	path = src/front
+	url = https://github.com/woelmoe/stil-jira-front.git
