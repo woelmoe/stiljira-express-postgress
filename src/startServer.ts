@@ -1,5 +1,4 @@
 import express from 'express'
-import vhost from 'vhost'
 import { createRoutes } from './routes'
 import 'dotenv/config'
 import { startConnectionToDb } from './seqDatabase'
