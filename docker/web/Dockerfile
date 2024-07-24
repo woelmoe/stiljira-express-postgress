@@ -13,5 +13,5 @@ COPY src/front/nginx.conf /etc/nginx/nginx.conf
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder usr/src/front/dist /usr/share/nginx/html/stiljira
 
-EXPOSE ${VITE_FRONT_PORT}
+EXPOSE 5173
 ENTRYPOINT ["nginx", "-g", "daemon off;"]

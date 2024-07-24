@@ -14,7 +14,7 @@ export async function startServer() {
     next()
   })
 
-  const port = Number(process.env.PORT) || 3000
+  const port = Number(process.env.VITE_BACK_PORT) || 3000
 
   await startConnectionToDb()
 
