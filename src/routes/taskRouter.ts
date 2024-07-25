@@ -10,8 +10,16 @@ taskRouter.use(jsonParser, (req, res, next) => {
 })
 taskRouter.get('/tasks', getTasks)
 
-taskRouter.post('/tasks', jsonParser, (req, res, next) => {
-  createTask({ req, res, next })
+taskRouter.post('/tasks', jsonParser, async (req, res) => {
+  const createdTask = await createTask(req.body)
+  try {
+    res.status(201).json({
+      message: 'Task created successfully!',
+      task: createdTask
+    })
+  } catch (e) {
+    console.log(e)
+  }
 })
 
 taskRouter.post('/tasks/put', jsonParser, (req, res, next) => {

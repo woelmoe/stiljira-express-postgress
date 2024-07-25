@@ -10,11 +10,8 @@ export function getTasks(data: IRouteData) {
     .catch((err) => console.log(err))
 }
 
-export async function createTask(data: IRouteData) {
-  const { res, req } = data
-  const newTask = req.body
-
-  const payload: ITaskInput = {
+export async function createTask(newTask: ITaskInput): Promise<ITaskOutput> {
+  const payload = {
     type: newTask.type,
     content: newTask.content,
     description: newTask.description
@@ -22,17 +19,13 @@ export async function createTask(data: IRouteData) {
   try {
     const result = await Task.create(payload)
     const { dataValues } = result
-    const task: ITaskOutput = {
+    return {
       title: `Task-${dataValues.id}`,
       content: dataValues.content,
       description: dataValues.description,
       id: dataValues.id,
       type: dataValues.type
     }
-    res.status(201).json({
-      message: 'Task created successfully!',
-      task
-    })
   } catch (e) {
     console.log(e)
   }
