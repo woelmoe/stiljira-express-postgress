@@ -2,19 +2,14 @@ import express from 'express'
 import 'dotenv/config'
 import { checkDomain } from './checkDns'
 import taskRouter from './routes/taskRouter'
+import cors from './utils/cors'
 
 export async function startServer() {
-  const app = express()
-  app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader('Access-Control-Allow-Methods', '*')
-    res.setHeader('Access-Control-Allow-Headers', '*')
-    res.setHeader('Access-Control-Allow-Credentials', 'true')
-    next()
-  })
-
-  app.use('/', taskRouter)
   const port = Number(process.env.VITE_BACK_PORT) || 3000
+  const app = express()
+
+  app.use('/', cors)
+  app.use('/', taskRouter)
 
   checkDomain(app)
 
