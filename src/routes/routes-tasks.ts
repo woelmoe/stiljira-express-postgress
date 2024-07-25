@@ -1,14 +1,14 @@
 import express from 'express'
-import { createTask, deleteTask, getTasks, updateTask } from '../controllers'
+import { createTask, deleteTask, getTasks, updateTask } from '../controllers/controllers-tasks'
 
-const taskRouter = express.Router()
+const routesTasks = express.Router()
 const jsonParser = express.json()
 
-taskRouter.use(jsonParser, (req, res, next) => {
+routesTasks.use(jsonParser, (req, res, next) => {
   next()
 })
 
-taskRouter.get('/tasks', async (req, res) => {
+routesTasks.get('/tasks', async (req, res) => {
   const allTasks = await getTasks()
   try {
     res.status(200).json(allTasks)
@@ -17,7 +17,7 @@ taskRouter.get('/tasks', async (req, res) => {
   }
 })
 
-taskRouter.post('/tasks', async (req, res) => {
+routesTasks.post('/tasks', async (req, res) => {
   const createdTask = await createTask(req.body)
   try {
     res.status(201).json({
@@ -29,7 +29,7 @@ taskRouter.post('/tasks', async (req, res) => {
   }
 })
 
-taskRouter.post('/tasks/put', async (req, res) => {
+routesTasks.post('/tasks/put', async (req, res) => {
   const editedTask = req.body
   try {
     const task = await updateTask(editedTask)
@@ -39,7 +39,7 @@ taskRouter.post('/tasks/put', async (req, res) => {
   }
 })
 
-taskRouter.post('/tasks/delete', async (req, res) => {
+routesTasks.post('/tasks/delete', async (req, res) => {
   const task = req.body
   try {
     const deleted = await deleteTask(task)
@@ -52,4 +52,4 @@ taskRouter.post('/tasks/delete', async (req, res) => {
   }
 })
 
-export default taskRouter
+export default routesTasks

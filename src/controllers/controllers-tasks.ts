@@ -1,5 +1,5 @@
-import { ITaskInput, ITaskOutput } from './interfaces/interfaces'
-import Task from './entities/Task'
+import { ITaskInput, ITaskOutput } from '../interfaces/interfaces'
+import Task from '../entities/Task'
 
 export async function getTasks() {
   try {
