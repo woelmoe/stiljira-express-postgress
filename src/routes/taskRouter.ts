@@ -5,9 +5,9 @@ const taskRouter = express.Router()
 const jsonParser = express.json()
 
 taskRouter.use(jsonParser, (req, res, next) => {
-  console.log('Time: ', Date.now())
   next()
 })
+
 taskRouter.get('/tasks', async (req, res) => {
   const allTasks = await getTasks()
   try {
@@ -17,7 +17,7 @@ taskRouter.get('/tasks', async (req, res) => {
   }
 })
 
-taskRouter.post('/tasks', jsonParser, async (req, res) => {
+taskRouter.post('/tasks', async (req, res) => {
   const createdTask = await createTask(req.body)
   try {
     res.status(201).json({
@@ -29,9 +29,8 @@ taskRouter.post('/tasks', jsonParser, async (req, res) => {
   }
 })
 
-taskRouter.post('/tasks/put', jsonParser, async (req, res) => {
+taskRouter.post('/tasks/put', async (req, res) => {
   const editedTask = req.body
-
   try {
     const task = await updateTask(editedTask)
     res.status(200).json({ message: 'Task updated!', task })
@@ -40,8 +39,17 @@ taskRouter.post('/tasks/put', jsonParser, async (req, res) => {
   }
 })
 
-taskRouter.post('/tasks/delete', jsonParser, (req, res, next) => {
-  deleteTask({ req, res, next })
+taskRouter.post('/tasks/delete', async (req, res) => {
+  const task = req.body
+  try {
+    const deleted = await deleteTask(task)
+    if (!deleted) {
+      return res.status(404).json({ message: `Task ${task.id} not found!` })
+    }
+    res.status(200).json({ message: `Task ${task.id} deleted!` })
+  } catch (e) {
+    console.log(e)
+  }
 })
 
 export default taskRouter

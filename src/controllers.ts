@@ -1,4 +1,4 @@
-import { IRouteData, ITaskInput, ITaskOutput } from './interfaces/interfaces'
+import { ITaskInput, ITaskOutput } from './interfaces/interfaces'
 import Task from './entities/Task'
 
 export async function getTasks() {
@@ -45,21 +45,16 @@ export async function updateTask(updatedTask: ITaskInput) {
   }
 }
 
-export async function deleteTask(data: IRouteData) {
-  const { res, req } = data
-  const editedTask = req.body
-  const foundTask = await Task.findByPk(editedTask.id)
-  if (!foundTask) {
-    return res.status(404).json({ message: `Task ${editedTask.id} not found!` })
-  }
+export async function deleteTask(task: ITaskInput): Promise<boolean> {
   try {
     await Task.destroy({
       where: {
-        id: editedTask.id
+        id: task.id
       }
     })
-    res.status(200).json({ message: `Task ${editedTask.id} deleted!` })
+    return true
   } catch (e) {
     console.log(e)
   }
+  return false
 }
