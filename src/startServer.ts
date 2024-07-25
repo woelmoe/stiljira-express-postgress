@@ -1,7 +1,7 @@
 import express from 'express'
 import 'dotenv/config'
 import { checkDomain } from './checkDns'
-import router from './routes'
+import taskRouter from './routes/taskRouter'
 
 export async function startServer() {
   const app = express()
@@ -13,7 +13,7 @@ export async function startServer() {
     next()
   })
 
-  app.use('/', router)
+  app.use('/', taskRouter)
   const port = Number(process.env.VITE_BACK_PORT) || 3000
 
   checkDomain(app)
