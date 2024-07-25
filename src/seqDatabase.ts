@@ -1,6 +1,5 @@
 import { Sequelize } from 'sequelize'
 import 'dotenv/config'
-import Task from './assets/Task'
 
 export const seqDatabase = new Sequelize(
   process.env.PG_DB,
@@ -11,21 +10,3 @@ export const seqDatabase = new Sequelize(
     dialect: 'postgres'
   }
 )
-
-let tryCounter = 10
-export async function startConnectionToDb() {
-  try {
-    await Task.sync()
-  } catch (error) {
-    tryCounter--
-    setTimeout(() => {
-      console.log('Give another try...', tryCounter)
-      startConnectionToDb()
-    }, 1000)
-    // console.error(error)
-    if (!tryCounter) {
-      console.log('Connection tries are over!')
-      process.exit(1)
-    }
-  }
-}

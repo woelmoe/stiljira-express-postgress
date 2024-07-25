@@ -1,20 +1,24 @@
-import express, { Express } from 'express'
+import express from 'express'
 import { createTask, deleteTask, getTasks, updateTask } from './controllers'
+const router = express.Router()
+const jsonParser = express.json()
 
-export function createRoutes(app: Express) {
-  const jsonParser = express.json()
+router.use(jsonParser, (req, res, next) => {
+  console.log('Time: ', Date.now())
+  next()
+})
+router.get('/tasks', getTasks)
 
-  app.get('/tasks', getTasks)
+router.post('/tasks', jsonParser, (req, res, next) => {
+  createTask({ req, res, next })
+})
 
-  app.post('/tasks', jsonParser, (req, res, next) => {
-    createTask({ req, res, next })
-  })
+router.post('/tasks/put', jsonParser, (req, res, next) => {
+  updateTask({ req, res, next })
+})
 
-  app.post('/tasks/put', jsonParser, (req, res, next) => {
-    updateTask({ req, res, next })
-  })
+router.post('/tasks/delete', jsonParser, (req, res, next) => {
+  deleteTask({ req, res, next })
+})
 
-  app.post('/tasks/delete', jsonParser, (req, res, next) => {
-    deleteTask({ req, res, next })
-  })
-}
+export default router

@@ -1,8 +1,7 @@
 import express from 'express'
-import { createRoutes } from './routes'
 import 'dotenv/config'
-import { startConnectionToDb } from './seqDatabase'
 import { checkDomain } from './checkDns'
+import router from './routes'
 
 export async function startServer() {
   const app = express()
@@ -14,13 +13,10 @@ export async function startServer() {
     next()
   })
 
+  app.use('/', router)
   const port = Number(process.env.VITE_BACK_PORT) || 3000
 
-  await startConnectionToDb()
-
   checkDomain(app)
-
-  createRoutes(app)
 
   app.listen(port, '0.0.0.0', () => {
     console.log(`[server]: new Server is running at http://localhost:${port}`)
