@@ -10,7 +10,7 @@ RUN yarn build
 
 FROM nginx:alpine as production-build
 
-COPY src/front/nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder usr/src/front/dist /usr/share/nginx/html/stiljira
 
