@@ -31,20 +31,16 @@ export async function createTask(newTask: ITaskInput): Promise<ITaskOutput> {
   }
 }
 
-export async function updateTask(data: IRouteData) {
-  const { res, req } = data
-  const editedTask = req.body
-
-  const payload: ITaskInput = {
-    type: editedTask.type,
-    content: editedTask.content,
-    description: editedTask.description
+export async function updateTask(updatedTask: ITaskInput) {
+  const payload = {
+    type: updatedTask.type,
+    content: updatedTask.content,
+    description: updatedTask.description
   }
   try {
-    const task = await Task.update(payload, {
-      where: { id: editedTask.id }
+    return await Task.update(payload, {
+      where: { id: updatedTask.id }
     })
-    res.status(200).json({ message: 'Task updated!', task })
   } catch (e) {
     console.log(e)
   }

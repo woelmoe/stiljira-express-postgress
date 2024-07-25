@@ -22,8 +22,15 @@ taskRouter.post('/tasks', jsonParser, async (req, res) => {
   }
 })
 
-taskRouter.post('/tasks/put', jsonParser, (req, res, next) => {
-  updateTask({ req, res, next })
+taskRouter.post('/tasks/put', jsonParser, async (req, res) => {
+  const editedTask = req.body
+
+  try {
+    const task = await updateTask(editedTask)
+    res.status(200).json({ message: 'Task updated!', task })
+  } catch (e) {
+    console.log(e)
+  }
 })
 
 taskRouter.post('/tasks/delete', jsonParser, (req, res, next) => {
