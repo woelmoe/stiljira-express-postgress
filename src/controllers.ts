@@ -1,5 +1,5 @@
 import { IRouteData, ITaskInput, ITaskOutput } from './interfaces/interfaces'
-import Task from './assets/Task'
+import Task from './entities/Task'
 
 export function getTasks(data: IRouteData) {
   const { res } = data
