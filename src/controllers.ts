@@ -1,13 +1,12 @@
 import { IRouteData, ITaskInput, ITaskOutput } from './interfaces/interfaces'
 import Task from './entities/Task'
 
-export function getTasks(data: IRouteData) {
-  const { res } = data
-  Task.findAll()
-    .then((tasks) => {
-      res.status(200).json(tasks)
-    })
-    .catch((err) => console.log(err))
+export async function getTasks() {
+  try {
+    return await Task.findAll()
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 export async function createTask(newTask: ITaskInput): Promise<ITaskOutput> {

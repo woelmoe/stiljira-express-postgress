@@ -8,7 +8,14 @@ taskRouter.use(jsonParser, (req, res, next) => {
   console.log('Time: ', Date.now())
   next()
 })
-taskRouter.get('/tasks', getTasks)
+taskRouter.get('/tasks', async (req, res) => {
+  const allTasks = await getTasks()
+  try {
+    res.status(200).json(allTasks)
+  } catch (e) {
+    console.log(e)
+  }
+})
 
 taskRouter.post('/tasks', jsonParser, async (req, res) => {
   const createdTask = await createTask(req.body)
