@@ -3,6 +3,7 @@ FROM node:18.16.1-alpine as builder
 WORKDIR usr/src/front
 
 COPY ./src/front .
+COPY ./.env .
 
 RUN yarn install
 RUN yarn build
