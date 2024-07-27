@@ -1,5 +1,5 @@
 import express from 'express'
-import { createTask, deleteTask, getTasks, updateTask } from '../controllers/controllers-tasks'
+import { createTask, deleteTask, getTasks, updateTask } from '../services/services-tasks'
 
 const routesTasks = express.Router()
 const jsonParser = express.json()
