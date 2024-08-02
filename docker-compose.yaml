@@ -17,7 +17,7 @@ services:
       dockerfile: ./docker/back/Dockerfile
     image: stiljira_back
     ports:
-      - '${VITE_BACK_PORT}:${VITE_BACK_PORT}'
+      - '${BACK_PORT}:${BACK_PORT}'
     environment:
       - PG_DB=${PG_DB}
       - PG_USER=${PG_USER}

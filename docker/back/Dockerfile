@@ -7,6 +7,5 @@ COPY . .
 RUN yarn install
 RUN yarn build
 
-EXPOSE ${VITE_FRONT_PORT}
 CMD [ "tsc" ]
 CMD [ "node", "dist/index.js" ]
